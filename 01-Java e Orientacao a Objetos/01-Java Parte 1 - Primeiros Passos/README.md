@@ -248,4 +248,185 @@ Você deve estar se perguntando o que aconteceu, já que o JDK foi instalado, e é 
 * Quais das afirmações abaixo são verdadeiras referente a JDK e JRE?
 
 * R: 
-	
+	* O JRE é o ambiente para executar uma aplicação Java. Caso queira executar uma aplicação Java apenas, baste o JRE (Java Runtime Environment).
+	* O JDK é o ambiente para executar uma aplicação Java SE e possui várias ferramentas de desenvolvimento. O JDK são as ferramentas de desenvolvimento (como o compilador) mas também tem JRE embutido!
+
+<h2>Para saber mais: JVM vs JRE vs JDK</h2>
+
+* O mundo Java é cheio de siglas com 3 ou 4 letras começando com J. Você já conhece duas famosas: o JRE e JDK. O primeiro é o ambiente de execução, o segundo são as ferramentas de desenvolvimento junto com o ambiente de execução. Simplificando podemos dizer:
+
+* JDK = JRE + ferramentas desenvolvimento
+* Existe uma terceira sigla, JVM (Java Virtual Machine), que também já usamos durante o curso. A responsabilidade da Java Virtual Machine é executar o Bytecode! Então qual é diferença entre JVM e JRE? Ambos executam o Bytecode, certo?
+
+* A resposta é simples: O JRE (o nosso ambiente de execução) contém a JVM, mas também possui um monte de bibliotecas embutidas. Ou seja, para rodar uma aplicação Java não basta ter apenas a JVM, também é preciso ter as bibliotecas.
+
+* Assim podemos simplificar e dizer:
+
+* JRE = JVM + bibliotecas
+* É importante entender que você não pode baixar a JVM apenas. Você sempre baixa o JRE que tem a JVM e as bibliotecas em conjunto. Tudo bem?
+
+<h2>Compile e rode seu primeiro programa Java</h2>
+
+* Como falamos no início, em um primeiro contato, o código em Java pode ser complicado de ser escrito e compreendido. Às vezes precisamos escrever um pouco mais do que gostaríamos para fazer algo.
+
+* Antes de usarmos um IDE para lidarmos com o código, é legal que você o faça em um sistema bem simples, como o bloco de notas - outras opções são o TextPad, Atom, Visual Studio Code, Sublime, ou qualquer outro.
+
+* Nosso primeiro código Java será feito no editor de texto mais simples possível, em plain text. Faremos o "Olá mundo" para testarmos e vermos como funciona a compilação e execução de programas Java.
+
+* O Java veio da linguagem C na década de 90, então, não é tão simples quanto digitarmos print("olá mundo"). A linha que faz um print na tela, por exemplo, é
+
+* System.out.println("olá mundo");
+* Nesta linguagem, toda instrução que damos sem as chaves necessita do ponto e vírgula (;). Todo código Java também precisa estar dentro de uma classe, que pode ser uma interface, um Enum. Neste caso, ele se insere na classe Programa.
+
+* Uma instrução como esta, com System.out.println(), precisa estar dentro de um método chamado main, que ainda não vimos, acompanhado de outros termos que também aprenderemos depois.
+
+* É muito comum o uso de public antes de class Programa, e embora isto não seja estritamente necessário no nosso caso, vamos colocá-lo para quando formos ler códigos de outros programadores e IDEs.
+
+```java
+public class Programa {
+
+    public static void main(String[] args) {
+        System.out.println("olá mundo");
+    }
+}
+```
+
+* No momento, focaremos na linha System.out.println("olá mundo");, que poderá ser considerado um comando apesar de não ser um, e mostrará algo na saída padrão, no caso o prompt do MS-DOS.
+
+* O menor programa Java seria similar ao código acima. Vamos tentar ver como funciona sua compilação e execução? Antes disso, salvaremos o arquivo nomeando-o com "Programa.java", em uma nova pasta denominada "java-codigo".
+
+* O nome do arquivo é muito importante - entenderemos melhor o motivo mais adiante, mas ele precisa ser o mesmo da class inserida no código.
+
+* No Prompt de Comando, digitaremos cd .. duas vezes, seguidos de "Enter", e dir, para a listagem de todos os diretórios. Depois, usaremos cd java-codigo para acessar o diretório, e em seguida digitaremos dir novamente.
+
+* Dica: é possível usar a tecla TAB para autocompletar palavras!
+
+* Ali, é listado um arquivo "Programa.java"! No Windows, há um comando chamado type (equivalente ao cat do terminal do Linux), o qual permite a visualização do conteúdo do arquivo. Neste caso, usaríamos type Programa.java.
+
+* A extensão .java não é entendida pela virtual machine, que entende o formato "meio máquina" de Virtual Machine Java, o bytecode, um arquivo com extensão .class.
+
+* A seguir, usaremos o comando javac Programa.java, e daremos um "Enter", com o qual serão mostradas as mensagens de erro de compilação, fundamentais para o aprendizado.
+
+* Apesar de não entendermos o que é public class ou static void main ainda, sabemos que System.out.println() seguido de aspas e o conteúdo, irá mostrar uma mensagem.
+
+* Por meio de dir no prompt, você verá que há dois arquivos: "Programa.java" e "Programa.class", este último no formato binário, em bytecode. E para chamarmos a virtual machine, usaremos o comando java Programa, e veremos a impressão de "olá mundo". Trata-se da primeira execução do nosso programa Java!
+
+* Agora, veremos os principais erros e características deste código. O primeiro surge ao digitarmos java Programa.class, o que traz a seguinte mensagem de erro na execução do programa:
+
+* Erro: Não foi possível localizar nem carregar a classe principal Programa.class
+* Isto acontece porque o programa não se chama "Programa.class", e sim simplesmente "Programa", apesar de estar contido no arquivo "Programa.class".
+
+* Outros erros mais comuns são os de compilação, como quando esquecemos de colocar o ponto e vírgula no fim da linha. Além disso, o Java possui palavras chave (keywords, ou palavras reservadas), dentre os quais utilizamos "public", "class", "static" e "void", que devem estar em letra minúscula, uma vez que o Java é case sensitive (reconhece o uso de letras maiúsculas ou minúsculas).
+
+* Em um ambiente mais complexo, veremos que isto ficará mais claro e fácil de ser trabalhado. É importante praticar e não ter medo das mensagens de erro de compilação.
+
+* As chaves abrem e fecham os blocos de códigos, indicando por exemplo que tudo aquilo que se encontra em public static void main pertence ao public class Programa, da mesma forma que System.out.println() pertence ao public static void mainvisível também por meio das indentações.
+
+* O Java possui outras particularidades, como o "Enter" e a barra de espaço serem opcionais; são convenções do código. Agora, o importante é escrever, entendendo o que está por trás do código, errar e fazer vários testes!
+
+<h2>Entrada da aplicação</h2>
+
+* A Ana está começando com desenvolvimento Java e já aprendeu que a entrada de uma aplicação é sempre a função (ou método) main. Porém, ela não se lembra qual era a definição correta (palavras chaves e parâmetros) dessa função/método:
+
+```java
+class Programa {
+
+    ??? main ???{
+        System.out.println("Você pode ajudar a Ana?");
+    }
+}
+```
+
+* Qual é a definição correta?
+
+* R: public static void main(String[] args)  Ainda não sabemos o que significam todas essas palavras, mas fique tranquilo pois vai ficar claro para você. Nesse momento basta saber que a entrada de uma aplicação Java é sempre uma função/método public static void main(String[] args).
+
+<h2>Sobre a compilação e execução</h2>
+
+* Veja as afirmações abaixo sobre a compilação e execução de código Java:
+
+	* 1 - Durante a compilação acontece uma verificação sintática do código fonte.
+
+	* 2 - Na compilação e execução podem aparecer erros.
+
+	* 3 - A JVM lê e executa o Bytecode.
+
+	* 4 - O compilador gera o Bytecode caso não tenha nenhum erro sintático no código fonte.
+
+* Quais afirmações são verdadeiras?
+
+* R: Todas as afirmações são verdadeiras.
+
+<h2>Compilar e executar</h2>
+
+* O Pedro está trabalhando pela primeira vez com o sistema operacional Linux, mas está estranhando, pois, o computador não possui uma interface gráfica (só funciona na linha de comando!).
+
+* Ou seja, ele precisa compilar e executar um código Java abaixo na linha de comando, no entanto esqueceu os comandos :(
+
+```java
+Arquivo Programa.java:
+
+class Programa {
+
+    public static void main(String[] args) {
+        System.out.println("Funcionou!!");
+    }
+}
+```
+* Quais comandos ele deve usar para compilar e rodar esse código Java?
+
+* R: 
+	* javac Programa.java
+	* java Programa
+ 
+	* Correto! Repare que passamos a extensão do arquivo (.java) para o comando javac:
+
+	* javac Programa.java
+	* E para chamar a JVM usamos apenas o nome da classe (sem extensão):
+	* java Programa
+
+
+<h2>O que aprendemos?</h2>
+
+* Nessa aula você escreveu o seu primeiro código Java e aprendemos:
+
+	* qual é a diferença entre JRE e JDK
+	* como compilar um código fonte Java na linha de comando (javac)
+	* como executar o Bytecode na linha de comando (java)
+	* um programa Java deve estar escrito dentro de uma classe (class)
+	* toda instrução Java deve ser finalizada com ;
+	* para abrir e fechar um bloco usaremos as chaves {}
+	* um programa Java possui uma entrada que é uma função (método) main
+	* para imprimir algo no console usamos a instrução System.out.println()
+
+-----------------------------------------------------------------------------
+<h1>Aula 03 - Começando com Eclipse</h1>
+
+<h2>Instalando o Eclipse</h2>
+
+* Por enquanto, temos o nosso primeiro programa Java escrito, e agora passaremos a entender como declarar variáveis, fazer if, laços e afins. Queremos um editor um pouco melhor do que o bloco de notas, de acordo com sua preferência.
+
+* A comunidade geral do Java costuma usar não um editor, mas um IDE (Integrated Development Environment, que em português seria algo como "Ambiente Integrado de Desenvolvimento"). Um IDE não é simplesmente um editor pois integra em um único local a linguagem, o editor, o compilador, a biblioteca e a documentação.
+
+* Os principais IDEs utilizados por quem programa em Java são: o NetBeans, da própria Oracle, o IntelliJ IDEA, usado como base para Android, e também conhecido por Android Studio, e o Eclipse, projeto em código aberto absorvido pela IBM e, hoje em dia, um consórcio de muitas empresas que tomam conta do programa, que você pode baixar aqui.
+
+* O Eclipse quer te ajudar na hora de codificar, muito mais do que focar em wizards e na grande quantidade de opções de menu. À primeira vista, o IDE pode parecer pequeno demais (pelo peso que possui), mas é porque há muitos plugins instaláveis para se facilitar o desenvolvimento de features e recursos.
+
+* Quando formos instalá-lo, aparecerá uma janela perguntando o que queremos, e escolheremos "Eclipse IDE for Java Developers". A opção "Eclipse IDE for Java EE Developers" requer um conhecimento maior, e serve para desenvolvimento de aplicativos web e softwares, e poderá ser explorada futuramente.
+
+* Após instalação e durante a execução, a primeira pergunta que o Eclipse fará tem a ver com o workspace, o diretório a ser utilizado para guardar todos os projetos Java. Isto pode ficar a seu critério, lembrando que iremos trabalhar sempre no Eclipse, então isso acabará não sendo tão relevante, pois você não precisará mais do Prompt de Comando para acessá-lo.
+
+* É possível ter mais do que um workspace, um só para exercícios da Alura e outros para projetos da empresa, por exemplo.
+
+* A primeira execução trará muitas janelas diferentes, mesmo se fecharmos o "Help". Vamos maximizar o Eclipse e fechar a aba "Welcome".
+
+* O IDE, ao ser aberto, pode te assustar um pouco, mas você verá que assusta menos do que outros com muito mais janelas e perguntas de wizards. No centro, ficam os arquivos que queremos editar, do lado direito estão os "Task List" (Lista de Tarefas), embaixo, "Problems" (Problemas). À esquerda, há "Package Explorer" (Explorador de pacotes).
+
+* O Eclipse denomina este conjunto de janelas de perspectiva, e cada uma delas é uma view. Então, veremos diversas views que irão nos ajudar em diferentes situações, tanto que se clicarmos em "Window > Show View" no menu superior, há várias opções. Não nos preocuparemos com isso agora.
+
+* No momento, queremos criar um projeto Java, e veremos poucos wizards! Para criarmos um projeto e uma classe Java, clicaremos em "File > New > Java Project" e, na nova janela, definiremos o projeto como "sintaxe-basica".
+
+* Provavelmente o Java já está instalado em seu computador; verifique sua versão, se é 8 ou posterior, pois utilizaremos recursos desta versão. Clicando em "Finish", o projeto é criado e aparecerá em "Package Explorer", contendo um diretório "src" (onde deve estar nosso código fonte), e "JRE System Library", uma biblioteca com tudo que temos e acessível pelo Java. Todos os comandos que utilizaremos estará nestes arquivos .jar.
+
+* Agora, queremos colocar nosso arquivo Java, o "Programa.class", no diretório de código fonte.
+
