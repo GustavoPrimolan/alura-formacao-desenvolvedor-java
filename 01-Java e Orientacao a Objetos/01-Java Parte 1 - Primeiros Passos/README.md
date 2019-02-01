@@ -839,26 +839,31 @@ double total = valor1+valor2;
 
 * int idade = (int) 30.0;
 * No caso acima, está explícito que será feito o cast de double para inteiro. Veja como funciona o cast implícito e explícito na tabela abaixo.
-PARA / DE	byte	short	char	int	long	float	double
-byte	----	Impl.	(char)	Impl.	Impl.	Impl.	Impl.
-short	(byte)	----	(char)	Impl.	Impl.	Impl.	Impl.
-char	(byte)	(short)	----	Impl.	Impl.	Impl.	Impl.
-int	(byte)	(short)	(char)	----	Impl.	Impl.	Impl.
-long	(byte)	(short)	(char)	(int)	----	Impl.	Impl.
-float	(byte)	(short)	(char)	(int)	(long)	----	Impl.
-double	(byte)	(short)	(char)	(int)	(long)	(float)	----
+|PARA / DE	|byte	|short	|char	|int	|long	|float	|double	|
+|---		|---	|---	|---	|---	|---	|---	|---	|	
+|byte		|----	|Impl.	|(char)	|Impl. 	|Impl.	|Impl.	|Impl.	|
+|short		|(byte)	|----	|(char)	|Impl. 	|Impl.	|Impl.	|Impl.	|
+|char		|(byte)	|(short)|----  	|Impl.	|Impl.	|Impl.	|Impl.	|
+|int		|(byte)	|(short)|(char)	|----	|Impl.	|Impl.	|Impl.	|
+|long		|(byte)	|(short)|(char)	|(int)	|----	|Impl.	|Impl.	|
+|float		|(byte)	|(short)|(char)	|(int)	|(long)	|----	|Impl.	|
+|double		|(byte)	|(short)|(char)	|(int)	|(long)	|(float)|----	|
 
 * Para comparar cada tipo primitivo de forma mais clara, a tabela abaixo mostra qual o tamanho de cada um.
 
-TIPO	TAMANHO
-boolean	1 bit
-byte	1 byte
-short	2 bytes
-char	2 bytes
-int	4 bytes
-float	4 bytes
-long	8 bytes
-double	8 bytes
+|TIPO |TAMANHO|
+|---|---|
+|boolean|1 bit|
+|boolean|1 bit|
+|byte	|1 byte|
+|short	|2 bytes|
+|char	|2 bytes|
+|int	|4 bytes|
+|float	|4 bytes|
+|long	|8 bytes|
+|double	|8 bytes|
+
+	
 
 -----------------------------------------------------------------
 <h1>Aula 05 - Trabalhando com caracteres</h1>
