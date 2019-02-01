@@ -430,3 +430,436 @@ class Programa {
 
 * Agora, queremos colocar nosso arquivo Java, o "Programa.class", no diretório de código fonte.
 
+<h2>Sobre IDEs e editores</h2>
+
+* Podemos programar em Java utilizando editores de textos e IDEs. Nesse contexto, temos as seguintes afirmativas:
+
+	* a) Um IDE é um ambiente integrado de desenvolvimento que centraliza em um único lugar o compilador da linguagem utilizada, editor de texto, documentação, banco de dados e tudo que gira em torno da criação de aplicações.
+
+	* b) Para quem está começando, o Eclipse IDE for Java EE Developers é o mais recomendado.
+
+	* c) NetBeans e Intellij são outros IDEs famosos do mundo Java.
+
+	* d) Um editor de texto possui tudo o que um IDE oferece.
+
+* Marque a opção verdadeira a respeito das afirmações anteriores:
+
+* R: A, C são verdadeiras. Um IDE é um ambiente integrado de desenvolvimento que centraliza em um único lugar, e NetBeans e Intellij são outros exemplos famosos de IDEs Java.
+
+<h2>Dentro do Eclipse IDE</h2>
+
+* Marque as alternativas verdadeiras:
+* R: 
+	* Um workspace é a pasta padrão que será utilizado para armazenar todos os projetos criados com a IDE Eclipse.
+
+	* Cada projeto do Eclipse é uma pasta dentro de um workspace.
+
+	* O conjunto de janelas exibidas pelo Eclipse IDE é denominado perspectiva.
+
+<h2>Nosso programa rodando no Eclipse</h2>
+* Vamos colocar o código do programa no Eclipse, utilizando o editor mais poderoso, o IDE. Para isto, há várias opções: acessando "File > New > Class", ou clicando com o lado direito do mouse em "src" e selecionando "New > Class", o que abrirá um wizard mas, como dito anteriormente, focaremos mais no código em si do que nas "mágicas" que os editores fazem para nós.
+
+* O nome desta classe será "Programa", porém não se preocupe ainda com as diversas opções que aparecem nesta janela. Há até um checkbox para o caso de querermos public static void main(String[] args), o que não é o caso, pois por ora queremos praticar bastante e escrever um código básico.
+
+* Clicando-se em "Finish", teremos o programa simples que escrevemos antes:
+
+```java
+public class Programa {
+
+    public static void main(String[] args){
+
+        System.out.println("ola mundo");
+    }
+}
+```
+* Conforme vamos digitando o código, o programa vai tentando completar, para nos ajudar. Na lateral esquerda, a bolinha vermelha com "x" indica erro de compilação em determinadas linhas.
+
+* O asterisco (*) ao lado do nome do arquivo indica que ele não foi salvo!
+
+* Para executarmos o código, basta acessarmos "Run > Run As > Java Application", o que abre uma view para Console, que abre e executa, no caso, o javaw.exe, uma versão do Java que não abre no Prompt do MS-DOS, utilizado internamente pelo Eclipse para chamar o nosso programa, que é o que gostaríamos de fazer neste ambiente.
+
+* Por enquanto, não há tantas vantagens em relação ao Notepad, e não é à toa que a Microsoft, quando lançou o Visual Studio, foi atrás dos recursos apresentados pelo Eclipse, com o ReSharper, contratando o Erich Gamma, autor de Design Patterns: Elements of Reusable Object-Oriented Software, para trabalhar com o IDE deles. O Eclipse foi uma inspiração para muitos, e é considerado uma ferramenta incrível.
+
+* Mas onde se encontra o "Programa.class", o bytecode que a virtual machine entende?
+
+* O "Package Explorer", que é uma view, esconde arquivos e diretórios que julga não serem relevantes. E faz sentido, pois no momento estamos focados no programa Java. Acessando-se "Window > Show View > Navigator", ele irá mostrar o File System.
+
+* Clicando em "sintaxe-basica" para abri-lo, além do "src", existem outros diretórios e arquivos, dentre os quais "Programa.class" na pasta "bin". ".classpath" e ".project" são arquivos de configuração utilizados pelo Eclipse para obter informações sobre seu projeto. Eles não devem ser editados diretamente e, clicando-se na aba "Source" na parte inferior da interface, você verá que trata-se de um .xml.
+
+* Não precisaremos nos preocupar com estes arquivos, pois é muito raro termos que mexer neles. Há muito tempo, só existia esta view, o "Navigator" (similar ao Windows Explorer). O "Package Explorer" surgiu para ajudar quem trabalha com Java, e o "Navigator", para quem trabalha com tudo, de forma geral. Na maioria das vezes, usaremos o "Package Explorer".
+
+* Se clicarmos em "src > Programa.java" com o lado direito do mouse, e em seguida em "Properties", veremos a localização exata do arquivo, possível de ser confirmado por meio do Prompt de Comando.
+
+* A partir de agora deixaremos de utilizar o prompt, pois faremos tudo no Eclipse. De qualquer forma, é importante lembrarmos que o Java pode ser usado por linhas de comando, se você preferir, o que acaba sendo até necessário em alguns casos.
+
+<h2>Projeto Java</h2>
+
+* Marque as alternativas verdadeiras:
+* R:
+	* Executamos nosso programa no Eclipse através do menu Run -> Run as -> Java Application.  Inclusive há uma tecla de atalho, exibida durante a opção que varia de acordo com seu sistema operacional.
+	*Dentro de um projeto Java, criamos uma nova classe através da opção do menu File -> New -> Class. Caso o projeto não seja um projeto Java, a opção Class não estará disponível, fique atento!
+	* A saída do nosso programa executado pelo Eclipse é feita através da view console. A view console mostra a saída do programa.
+
+<h2>Sobre a View Navigator</h2>
+
+* Marque a alternativa correta a respeito da View Navigator:
+
+* R: É parecida com o Windows Explorer do Windows ou o Finder do MAC.  Ela nos permite ver o diretório do projeto com seus arquivos na integra.
+
+-------------------------------------------------------------------------
+<h1>Aula 04 - Tipos e variáveis</h1>
+
+<h2>Tipo inteiro: int</h2>
+
+* Trabalharemos com sintaxes de variáveis e controles de fluxo - laços e condicionais - pela criação de um novo projeto acessando-se "New > Java Project". Poderíamos fazer tudo isto no mesmo arquivo, mas o intuito aqui é de treinar a codar e perder o medo das janelas e suas diversas opções.
+
+* Criaremos o "sintaxe-variaveis-e-fluxo", os dois tópicos que começaremos a ver. O novo projeto contendo o diretório "src" estará visível na view de "Package Explorer". No prompt, há um diretório "bin" escondido, pois o programa não quer mostrar o .class, e sim o código fonte Java. Reparem que no momento estou usando Mac, o que pouco importa, já que o Eclipse funciona da mesma maneira em todos os sistemas operacionais.
+
+* Criaremos nossa classe para começar a trabalhar com variáveis. Clicaremos com o lado direito do mouse em "src" e depois em "New > Class", e a classe se chamará "TestaVariaveis". No Java, um statement (ou instrução) não funciona fora dos métodos, portanto precisaremos do ponto inicial, do public static void main(String[] args), após o qual salvaremos:
+
+```java
+public class TestaVariaveis {
+
+    public static void main(String[] args) {
+
+    }
+}
+```
+
+* Poderíamos rodar a aplicação assim como está, mas não aconteceria nada. Então, digitaremos:
+
+```java
+public class TestaVariaveis {
+
+    public static void main(String[] args) {
+        System.out.println("ola novo teste");
+    }
+}
+```
+
+* Salvaremos novamente e rodaremos a aplicação indo à "Run > Run As > Java Application", ou clicando com o lado direito do mouse na classe com main, e em "Run As > Java Application". Também há o atalho "Ctrl + S". O Console mostrará o print, e com isto repetimos o mesmo teste do "ola mundo" feito anteriormente.
+
+* As palavras que aparecem em roxo no editor são as palavras chave, reservadas, e deverão estar sempre em caixa baixa. Agora, para criarmos uma variável denominada idade, que armazenará nossas idades, digitaremos:
+
+```java
+public class TestaVariaveis {
+
+    public static void main(String[] args) {
+        System.out.println("ola novo teste");
+
+        idade = 37;
+    }
+}
+```
+* No Java, como o Eclipse já está dando a entender sublinhando idade com vermelho, não compila isto, pois trata-se de uma linguagem estaticamente ou fortemente tipada, ou seja, que necessita da declaração de todas as variáveis e tipos a serem utilizados. Passando o mouse sobre a palavra sublinhada, lê-se a mensagem de erro "idade cannot be resolved to a variable".
+
+* Significa que "idade não pode ser entendida como uma variável", pois não foi declarada. O Eclipse inclusive dará algumas opções de "rápido conserto", ou quick fix, para a criação local da variável, ou remoção da linha, por exemplo. idade = 37 é uma atribuição, em que 37 se encontra dentro de idade.
+
+* Precisaremos declará-la informando que ela é do tipo numérico e que guarda um valor inteiro, sem decimais ou pontos flutuantes. int vem de Integer:
+
+```java
+public class TestaVariaveis {
+
+    public static void main(String[] args) {
+        System.out.println("ola novo teste");
+
+        int idade;
+        idade = 37;
+    }
+}
+```
+* Salvaremos e rodaremos este código. Clicando-se na setinha ao lado do ícone verde que indica play na barra de ferramentas superior, vê-se os últimos programas que foram rodados no programa. E clicando no ícone verde, roda-se o último deles.
+
+* O valor foi guardado, mas parece que nada aconteceu de fato. Além de atribuirmos uma variável, pode-se usar o valor, mostrando-o na tela. Para isto, utilizaremos o System.out.println de novo, desta vez sem as aspas, pois queremos a evaluation, o resultado daquela expressão, e não uma cadeia de caracteres, uma string:
+
+```java
+public class TestaVariaveis {
+
+    public static void main(String[] args) {
+        System.out.println("ola novo teste");
+
+        int idade;
+        idade = 37;
+
+        System.out.println(idade);
+    }
+}
+```
+* Inclusive, é possível ver que todas as menções à variável idade ficam em highlight, destacadas para mostrar que tratam-se da mesma variável. Vamos rodar o código acima para imprimirmos o valor de idade! No "Console", obteremos:
+
+* ola novo teste
+* 37
+* Poderemos trabalhar com os operadores aritméticos junto a estas variáveis, também:
+
+* idade = 30 + 10;
+* idade = 7 * 5 + 2;
+* Como na maioria das linguagens, no Java também há precedência, então as operações matemáticas seguem uma determinada ordem de prioridade, mas poderemos usar parênteses, desta forma:
+
+* idade = (7 * 5) + 2;
+* E assim por diante. Imprimiremos a idade três vezes:
+
+* int idade;
+* idade = 37;
+
+* System.out.println(idade);
+
+* idade = 30 + 10;
+
+* System.out.println(idade);
+
+* idade = (7 * 5) +  2;
+
+* System.out.println(idade);
+* E obteremos o resultado esperado, na aba "Console":
+
+* 37
+* 40
+* 37
+* No código, usamos algumas convenções: ao criarmos a classe TestaVariaveis, cuja funcionalidade ainda desconhecemos, usamos a primeira letra em maiúscula e, ao acrescentarmos a segunda palavra, não utilizamos underscore ou algo do tipo, e sim a primeira letra em caixa alta de novo. Isto se chama Camel Case, e aparece com frequência no Java e em muitas outras linguagens - é uma convenção de código, e seu uso não é obrigatório.
+
+* Da mesma forma, a variável iniciando-se com "i" minúsculo é o padrão, bem como não há o costume de se abreviar palavras. No Java, vocês verão nomes gigantescos de variáveis! É legal nos atentarmos a estas práticas para começarmos a nos acostumar com estes hábitos essenciais para quando formos trabalhar com grandes equipes.
+
+* Para mostrarmos uma frase antes de um número, basta imprimirmos uma string, como "a idade é", juntamente com a variável idade, assim:
+
+* System.out.println("a idade é " + idade);
+* O operador +, na maioria das vezes, tem a função de somar variáveis de tipo numérico, sendo a única exceção estes casos em que acompanham strings, com os números sendo convertidos em letras e tudo sendo concatenado. Este operador, portanto, também serve para concatenar algo com uma palavra ou frase (uma string).
+
+* Salvando e rodando a aplicação, teremos:
+
+* A idade é 37
+* Pode-se acrescentar mais strings após a variável usando-se o operador.
+
+* Há outra versão do System.out.println(), o System.out.print(), sem o ln, isto é, sem o line, que pula a linha, que poderá ser utilizado de acordo com sua preferência.
+
+<h2>Criando uma variável numérica</h2>
+
+* Selecione a opção que mostra como podemos criar e definir o valor de uma variável para representar a quantidade de dias de um mês?
+
+* R:
+
+```java
+int diasDoMes;
+
+diasDoMes = 30;
+```
+
+<h2>Tipo flutuante: double</h2>
+
+* Também queremos trabalhar com outros tipos de variáveis, pois se tentarmos colocar no lugar da idade, em idade = 37;, um valor como 37.5, a compilação não irá ocorrer. O erro que se lê ao passarmos o mouse em cima, é "Type mismatch: cannot convert from double to int", isto é, a conversão não é possível. Lembrando que no Java nunca usaremos a vírgula para separar o decimal no código fonte.
+
+* Vamos criar uma nova classe para testar os números com ponto flutuante, clicando em "(default package)" com o lado direito do mouse e em "New > Class", nomeando-a de "TestaPontoFlutuante". Teremos, então:
+
+```java
+public class TestaPontoFlutuante {
+
+    public static void main(String[] args) {
+        double salario;
+        salario = 1250.70;
+        System.out.println("meu salário é " + salario);
+    }
+}
+```
+
+* Há dois tipos de variáveis em que cabem o tal de ponto flutuante, sendo que a mais utilizada é o double, como visto acima. Salvaremos o código e o rodaremos! Na aba "Console", obteremos o resultado:
+
+* meu salário é 1250.7
+* Dica: as views podem ser customizadas de acordo com sua necessidade, sendo possível fechar aquelas que não estão em uso, por exemplo.
+
+* O 0 (zero) referente aos centavos não apareceram porque é assim que a variável double é convertida para se juntar à string. Poderemos formatar para aparecerem duas, três casas decimais, ou apenas uma, por meio dos formatters do Java, inclusos na biblioteca. Não veremos isto neste curso, porém há diversos recursos disponíveis, como o printf, da linguagem C, para colocarmos porcentagens e afins.
+
+* No double cabem variáveis do tipo inteiro, isto é, poderemos fazer o caminho inverso, indicando que temos uma variável que guarda idade, com número 37. Reparem que este valor não possui decimal. Não tem problema, um número de tipo inteiro cabe em um tipo double. O inverso, um decimal em um int, é que não é compatível.
+
+* O Java tem regras um tanto rígidas, portanto não aceitará 3.0 como int, já que não aceita pontos flutuantes. Ele é uma linguagem com peculiaridades que algumas pessoas podem estranhar, sendo vantajoso para se trabalhar em equipe pois reforça uma padronização, e as pessoas trabalham de formas parecidas.
+
+* Para enxergarmos a forma como o double funciona, podemos fazer uma conta de divisão, por exemplo:
+
+* double divisao = 3.14 / 2;
+* System.out.println(divisao);
+* Rodando o código acima, teremos:
+
+* 1.57
+* Parece básico para quem já conhece linguagem estaticamente tipadas, mas mesmo nessa parte mais básica da linguagem, nos aprofundaremos mais, para sentirmos algumas das características do Java.
+
+* O que aconteceria no caso de digitarmos int outraDivisao = 5 / 2;? Alguns podem pensar que isso não é compilado, que dará erro, pois o resultado é 2.5, o que não cabe em int.
+
+* No Java, entretanto, há uma regra: quando há uma divisão entre dois números inteiros, ele "forçará" um número inteiro como resultado. Se printarmos esta divisão, obteremos como resultado o valor 2. Estranho, não?
+
+* E se quiséssemos que o resultado fosse 2.5 de fato, poderíamos tentar double novaTentativa = 5 / 2;, e pediríamos sua impressão, que traria 2.0. Piorou! O Java irá ler apenas o lado que vem antes da atribuição na linha de código relativa ao double. Ou seja, primeiro, ele irá executar a divisão 5 / 2, e depois ele tentará colocar o resultado em um double.
+
+* Na verdade, o que gostaríamos é que a conta tivesse sido feita partindo-se do double e, neste caso, bastaria que um dos valores da divisão fosse deste tipo, como em 5.0 / 2. Desta forma, como trata-se de um double dividido por um int, a conta é feita levando-se em consideração o ponto flutuante.
+
+* Esta divisão, sim, trará 2.5 como resultado. Parece pegadinha, mas são características de linguagem que vão te deixar mais a par de como o Java funciona.
+
+* Fizemos um truque: estávamos sempre declarando a variável primeiro, e na linha seguinte, fazendo a atribuição. Depois, fizemos double idade = 37;. Ao declararmos variáveis, é muito comum inicializá-las, porque é estranho declararmos uma variável, digitarmos um monte de código e só depois inicializarmos um valor.
+
+* O comum é fazermos tudo na mesma linha. Desse modo, as linhas abaixo,
+
+* double salario;
+* salario = 1250.70;
+* pela proximidade, equivalem a escrevermos isto:
+
+* double salario = 1250.70;
+* Declaramos a variável informando seu tipo, e a atualizamos, isto é, inicializamos ela, fazendo uma atribuição.
+
+* Vamos salvar o código!
+
+<h2>Operações entre numeros</h2>
+
+* Aprendemos que é possível fazer operações entre números, podemos até fazer operações aritméticas com variáveis de tipos diferentes como multiplicar um inteiro por um número de ponto flutuante (int e double).
+
+* Verificando cada instrução abaixo diga qual das opções está errada. 
+
+* R: 
+	* int brindes = 15;
+	* int pessoas = 2;
+	* System.out.println(brindes / pessoas);
+	* Deve imprimir 7.5
+
+ 
+	* Este código é o errado. Pois quando fazemos operações entre inteiros o resultado sempre será inteiro e não de ponto flutuante. O resultado na verdade seria 7.
+
+<h2>Conversões e outros tipos</h2>
+
+* Haverá momentos em que queremos misturar os tipos de variáveis, como o double e o int. Vimos que um int cabe no double, mas o caminho inverso não funciona. Vamos, então, criar uma classe denominada "TestaConversao".
+
+* Incluiremos uma variável do tipo salario com os 1270.50, que por algum motivo queremos que esteja em uma variável do tipo inteiro. E então guardaremos salario em valor:
+
+```java
+public class TestaConversao {
+
+    public static void main(String[] args) {
+        double salario = 1270.50;
+        int valor = salario;
+    }
+}
+```
+* Já vimos que isto não funciona, pois o compilador do Java é rígido e não deixa que isto ocorra sem que afirmemos com total segurança de estarmos cientes de que perderemos o .50. Por conta disso, deixaremos as duas linhas comentadas, e mostraremos que o caminho inverso é possível:
+
+```java
+public class TestaConversao {
+
+    public static void main(String[] args) {
+        // double salario = 1270.50;
+        // int valor = salario;
+
+        double valor = 3;
+    }
+}
+```
+* Ou seja, a conversão de um valor inteiro para um tipo double é possível, academicamente chamada de promoção, ou "ser promovido a um double", e acontece de maneira automática.
+
+* Para tentarmos fazer com que a parte do código comentada acima funcione, poderemos forçar a conversão, moldando um double para que ele se encaixe em um int.
+
+* É claro que não haverá encaixe perfeito, resultando em arestas que provavelmente serão perdidas. Faremos isso utilizando uma sintaxe comum a outras linguagens, o casting, para que o double seja transformado em um int.
+
+```java
+public class TestaConversao {
+
+    public static void main(String[] args) {
+        double salario = 1270.50;
+        int valor = (int) salario;
+        System.out.println(valor);
+    }
+}
+```
+* Se printarmos valor, será mostrada apenas a parte inteira daquele número: 1270. É isso que chamamos de casting que, nestas variáveis que guardam números, não é algo muito complexo.
+
+* Mais adiante, veremos o casting de variáveis que são referência, e têm a ver com orientação a objetos, se são compilados ou não, se darão exceptions; é um mundo à parte.
+
+* Basicamente, para os tipos chamados primitivos, as variáveis básicas que estamos vendo aqui e são double com "d" minúsculo, e na cor roxa, possuem funcionamento mais simples. O casting faz a conversão quando ela não é possível de forma automática.
+
+* Neste caso, sem o (int), assim, entre parênteses, a compilação não ocorre, e a aplicação não rodará.
+
+* Como saberemos quais valores se encaixam em quê, e outros tipos numéricos?
+
+* No Java, o int e o double são os tipos mais usados, os outros aparecem de maneira muito esporádica. A nível de curiosidade, em int cabem 32bits com sinais, isto é, números positivos e negativos. Mais especificamente, cabem de 2 elevado a 31 negativos, a 2 elevado a 31 positivos menos 1, por conta do 0 (zero), o que dá uma quantidade de cerca de 2 bilhões.
+
+* O int pode guardar até 2 bilhões e, passando dessa quantidade, ocorrerá um overflow. Caso se queira guardar um número maior ou menor que este, será preciso um número com 64bits, que no Java é o long, e guarda um número de até 2 elevado a 63 menos 1. É um número absurdo, que inclusive precisa de um L no fim, em caixa alta ou baixa, para indicar que estouramos os 2 bilhões!
+
+* long numeroGrande = 32432423523L;
+* Por padrão, quando não é um double, um número no Java é considerado um int. O L indica "literal", um valor específico, como um long. Em contrapartida, há números menores: o short, que guarda um número de 16bits menos 1, e o byte, que é menor ainda, de até 2 elevado a 8, que dá 256 com 128 negativos, a 127 com 1 a menos:
+
+* short valorPequeno = 2131;
+* byte b = 127;
+* E se o número for maior do que 64bits, um número gigantesco? Daí, não serão usados tipos primitivos, ou estas variáveis. Podem ser objetos, e então usaremos bibliotecas.
+
+* Nesse caso, usaremos este exemplo:
+
+```java
+double valor1 = 0.2;
+double valor2 = 0.1;
+double total = valor1+valor2;
+```
+* Esta operação deveria resultar em 0.3, certo? Ao acrescentarmos System.out.println(total); e rodarmos o código, porém, obteremos 0.30000000000000004. Que número maluco é esse?
+
+* Há várias questões matemáticas por trás dele. Se pesquisarmos o valor no Google, encontramos diversos resultados de pessoas buscando uma explicação. Existe até o site 0.30000000000000004.com, com a explicação matemática para esse floating point, do porquê, em muitas linguagens, essa soma dar exatamente esse valor.
+
+* Não é à toa - como uma representação de decimal do inteiro é utilizada para se obter um ponto flutuante, fica complicado fazer uma operação aritmética deste tipo e guardar o resultado internamente. Por isto, o Java, como muitas outras linguagens, segue a especificação IEEE 754, de leitura complexa, que remete à Engenharia. De qualquer forma, é normal que este resultado apareça quando utilizamos o double.
+
+* Para lidarmos com dinheiro sem que apareçam centavos, por exemplo, usaríamos o BigDecimal, de que falaremos mais para a frente. Por ora continuaremos com o double pois ainda estamos iniciando na linguagem, e queremos usar variáveis que são palavras chave do Java.
+
+* Os quatro tipos de tipo primitivo são: int, long, byte e short. Quanto aos tipos flutuantes, além do double, há o float e, se tentarmos definir a variável como recebendo 3.14, ocorre o mesmo problema do long, mesmo se tratando de ponto flutuante.
+
+* Para o Java, 3.14 é um double com 64bits. É um valor que cabe em um tipo flutuante com 32bits? Não, e informações podem ser perdidas. Neste caso, usa-se o casting, o que seria estranho, ou se indica que este literal, o valor 3.14, é um float, colocando-se "f" no fim:
+
+* float pontoFlutuante = 3.14f;
+* Mais uma vez, o mais importante é o enfoque no double e no int, que aparecem com muito mais frequência. E no long em alguns casos, o qual será visto em alguns exercícios.
+
+
+<h2>Imprimindo texto e números</h2>
+
+* Agora que já sabemos fazer operações com variáveis e também concatenar texto com números, use o que aprendeu para indicar todas as alternativas abaixo que mostrem o resultado "A idade de Marcos é 30!".
+
+* R:
+
+	* int idade = 20;
+	* System.out.println("A idade de Marcos é 30!");
+ 
+	* Opção correta! Neste caso não estamos usando a variável idade que recebe 20.
+
+	* double idade = 30.0;
+	* System.out.println("A idade de Marcos é " + (int) idade + "!");
+ 
+	* Opção correta! Estamos fazendo o type cast no double que tem seu valor convertido para int. Desta forma não aparece a casa decimal.
+
+	* int idade = 30;
+	* System.out.println("A idade de Marcos é " + idade + "!");
+ 
+	* Opção correta!
+
+<h2>Para saber mais: Type Casting</h2>
+
+* Como foi visto nos vídeos, quando tentamos colocar um valor inteiro em uma variável do tipo double o Java não mostra erro. Quando tentamos, porém, colocar um double numa variável do tipo inteiro temos um erro de compilação.
+
+* Esta propriedade se dá porque o Java faz conversão implícita de um tipo menor para os tipos "maiores". De inteiro para double, por exemplo.
+
+* O contrário não é verdade por que existe perda de dados quando é feita a conversão. Acarretando em um "type mismatch" mostrando que esta instrução é de tipos incompatíveis.
+
+* Para fazer uma conversão onde pode haver perda de informações é necessário fazer um type casting. Veja a instrução abaixo.
+
+* int idade = (int) 30.0;
+* No caso acima, está explícito que será feito o cast de double para inteiro. Veja como funciona o cast implícito e explícito na tabela abaixo.
+PARA / DE	byte	short	char	int	long	float	double
+byte	----	Impl.	(char)	Impl.	Impl.	Impl.	Impl.
+short	(byte)	----	(char)	Impl.	Impl.	Impl.	Impl.
+char	(byte)	(short)	----	Impl.	Impl.	Impl.	Impl.
+int	(byte)	(short)	(char)	----	Impl.	Impl.	Impl.
+long	(byte)	(short)	(char)	(int)	----	Impl.	Impl.
+float	(byte)	(short)	(char)	(int)	(long)	----	Impl.
+double	(byte)	(short)	(char)	(int)	(long)	(float)	----
+
+* Para comparar cada tipo primitivo de forma mais clara, a tabela abaixo mostra qual o tamanho de cada um.
+
+TIPO	TAMANHO
+boolean	1 bit
+byte	1 byte
+short	2 bytes
+char	2 bytes
+int	4 bytes
+float	4 bytes
+long	8 bytes
+double	8 bytes
+
+-----------------------------------------------------------------
+<h1>Aula 05 - Trabalhando com caracteres</h1>
+
