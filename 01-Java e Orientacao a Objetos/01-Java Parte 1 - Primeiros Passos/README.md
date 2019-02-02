@@ -839,6 +839,7 @@ double total = valor1+valor2;
 
 * int idade = (int) 30.0;
 * No caso acima, está explícito que será feito o cast de double para inteiro. Veja como funciona o cast implícito e explícito na tabela abaixo.
+
 |PARA / DE|byte	|short|char|int|long|float|double|
 |---|---|---|---|---|---|---|---|	
 |byte|----|Impl.|(char)|Impl.|Impl.|Impl.|Impl.|
@@ -868,3 +869,1116 @@ double total = valor1+valor2;
 -----------------------------------------------------------------
 <h1>Aula 05 - Trabalhando com caracteres</h1>
 
+<h2>Char e String</h2>
+
+* A seguir, trabalharemos com caracteres e palavras! Criaremos uma nova classe mais uma vez, a "TestaCaracteres". Existe uma variável primitiva básica do Java que trabalha com chars, isto é, caracteres, cuja peculiaridade é guardar um único caractere de 16bits.
+
+* Usaremos as aspas simples para guardar a letra a, por exemplo:
+
+```java
+public class TestaCaracteres {
+
+    public static void main(String[] args) {
+        char letra = 'a';
+        System.out.println(letra);
+    }
+}
+```
+
+* Ao salvarmos e rodarmos este código, lê-se a no Console, nada muito especial.
+
+* Quando trabalhamos com chars, estamos realmente "presos" a um único caractere. Se substituirmos a do código acima por ab, o código não compilará, e o mesmo ocorrerá se utilizarmos aspas duplas em vez das simples. O char guarda em si um único código, um número da tabela de Unicode, como a ASCII, porém muito maior e sem limite definido.
+
+* letra, portanto, é um número e, se observarmos bem, o char guarda em seu valor um número, mas é uma variável do tipo numérico equivalente àquele short, mas ele contém apenas valores positivos, possuindo mais detalhes. No momento, é interessante sabermos que ele é um número que é convertido em uma letra, como no trecho a seguir:
+
+* char valor = 66;
+* System.out.println(valor);
+* A partir do qual obteremos:
+
+* B
+* Isto ocorre pois na tabela Unicode o 65 corresponde à letra a, portanto 66 refere-se a b. Testando-se o código abaixo,
+
+* valor = valor + 1;
+* System.out.println(valor);
+* há um erro de compilação em valor + 1, por conta da regra do Java quando se trabalha com dois tipos distintos em uma mesma operação, de dar o resultado no maior deles. Neste caso, o valor é do tipo char, e 1 é um int, que é maior. O resultado desta operação, portanto, será dado em int. No entanto, um inteiro cabe em um char? Não! Porém, novamente, o inverso é possível.
+
+* Se queremos que isto seja válido, devemos informar que a resposta disso passará pelo casting, moldando-se para o char:
+
+* valor = (char) (valor + 1);
+* System.out.println(valor);
+* Salvando e rodando o código, receberemos a letra C. O char é interessante, mas não é tão usado no dia a dia, como no caso de String, com S em maiúsculo. Ela não é palavra chave do Java, não guarda valor, é um tipo referência. As diferenças ficarão mais claras quando formos entender melhor sobre orientação a objetos.
+
+* Atenção: o funcionamento básico de uma String exige aspas duplas, e não simples, as quais podem inclusive ficar vazias (""). Em char, por outro lado, não é possível deixar as aspas simples sem nada dentro ('') - um espaço seria algo, e compilaria. Um char vazio, não.
+
+* String palavra = "alura cursos online de tecnologia";
+* System.out.println(palavra);
+* Salvando e rodando o código, teremos a impressão alura cursos online de tecnologia, como esperado. E é possível utilizarmos o operador de soma (+) para concatenar Strings, criando uma nova, como no exemplo abaixo:
+
+* palavra = palavra + 2020;
+* System.out.println(palavra);
+* Isto nos retornará alura cursos online de tecnologia2020. A String, então, não se comporta como um int ou um char, mas aparecerá recorrentemente. Em breve veremos que ela faz referência a um objeto e possui vários métodos. Ainda precisaremos aprender o básico e aprofundarmos nossos conhecimentos com calma!
+
+<h2>Declarando String e char</h2>
+
+* Rômulo é um grande entusiasta da linguagem Java e está sempre disposto a aprender novas coisas. A última coisa que Rômulo resolveu aprender são Strings e chars em Java, porém ele ainda não tem certeza de como deve declarar cada um dos tipos. Qual das alternativas têm a resposta correta para Rômulo?
+
+* R: 
+	* String frase = "Estou sempre disposto a aprender novas tecnologias";
+	* char letra = 'a';
+ 
+	* Lembre-se, uma String é declarada com aspas duplas " e pode ter zero ou mais caracteres. Um char é declarado com aspas simples ' e pode usar apenas um caractere!
+
+<h2>Qual será o resultado?</h2>
+
+* Rômulo, depois de assistir os vídeos deste capítulo, resolveu testar o que foi dito em aula e fez um código para somar dois valores quaisquer.
+
+* String parcela_1 = "10";
+* String parcela_2 = "20";
+
+* System.out.println(parcela_1+parcela_2);
+* Rômulo terá o resultado esperado (30) com este trecho de código?
+
+* R:
+	* Não, o resultado será 1020.
+	* O resultado será a concatenação das duas parcelas.
+
+<h2>Variáveis guardam valores</h2>
+
+* Um último detalhe muito interessante sobre estas variáveis do tipo primitivo - todas aquelas que vimos exceto a String - é seu funcionamento interno. O que são guardadas na memória delas?
+
+* Vamos criar mais uma classe, o TestaValores. E para não ficarmos digitando public static void main(String[] args) {} à mão o tempo todo, aprenderemos um atalho. Digitaremos "main" e apertaremos "Ctrl + barra de espaço" que, assim como em outros editores, tem a ver com o autocomplete. No Eclipse, também envolve templates.
+
+* Por meio deste atalho, aparecerão algumas opções, apertaremos a tecla "Enter", e o código aparece pronto no editor de texto. Isso passará a ser frequente para vocês.
+
+* Para entendermos como é guardado o valor de uma variável no Java, a passagem por valor, vamos fazer um desafio:
+
+```java
+public class TestaValores {
+
+    public static void main(String[] args) {
+        int primeiro = 5;
+        int segundo = 7;
+
+        System.out.println(segundo);
+```
+
+* Ao rodarmos o código, obteremos 7.
+
+```java
+public class TestaValores {
+
+    public static void main(String[] args) {
+        int primeiro = 5;
+        int segundo = 7;
+        segundo = primeiro;
+
+        System.out.println(segundo);
+```
+
+* Salvando e rodando este código, obteremos 5!
+
+* int primeiro = 5;
+* int segundo = 7;
+* segundo = primeiro;
+* primeiro = 10;
+
+* // quanto vale o segundo?
+
+* System.out.println(segundo);
+* No segundo, tínhamos guardado o primeiro, mas agora primeiro vale 10. Quanto vale segundo?
+
+* As linguagens de programação trabalham de formas diferentes dependendo do uso de um símbolo específico, ou da existência de alguma referência, e por aí vai. Estas variáveis do tipo primitivo são trabalhadas com o valor do conteúdo, da variável, então, quando copiamos 5 para dentro de segundo, e depois copiamos 10 para primeiro, a linha segundo = primeiro; não diz nada.
+
+* Quando se faz uma atribuição no Java, não se diz que uma variável sempre segue a outra, e sim que estamos copiando e colando valores. Deste modo, primeiro = 10; não surtirá efeito para segundo. Confirmaremos isto rodando a aplicação, pois continuaremos recebendo 5.
+
+* Isso significa que a variável guarda um valor, e não uma referência, e este exemplo dará base para as entendermos melhor.
+
+* Estamos prontos para o próximo passo, que consiste em finalmente começarmos com controle de fluxos, com if, while e for, para estruturarmos nossos primeiros programas! E então veremos a orientação a objetos (O.O.) de maneira contra procedural. Vamos lá?
+
+<h2>Concatenação de String e inteiros</h2>
+
+* Paulo, vendo que Rômulo continuava com algumas dificuldades com Java, resolveu elaborar um desafio para seu amigo utilizando conceitos de concatenação de Strings, vistos neste capítulo. O desafio continha o seguinte trecho de código:
+
+```java
+String saudacao = "Olá, meu nome é ";
+String nome = "Rômulo ";
+String continuacao = "e minha idade é ";
+int idade = 100;
+System.out.println(saudacao+nome+continuacao+idade);
+```
+
+* O código de Paulo para Rômulo possui algum problema?
+
+* R: Não há problemas, a concatenação pode ser feita sem problemas.
+
+---------------------------------------------------------------------------------
+<h1>Aula 06 - Praticando condicionais</h1>
+
+<h2>Testes com IF</h2>
+
+* Passaremos pelo nosso primeiro controle de fluxo, e testaremos a condicional if! Para isso, criaremos uma classe denominada "TestaCondicional", com uma variável inteira idade, inicializada na mesma linha:
+
+```java
+public class TestaCondicional {
+
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 20;
+        if (idade >= 18) {
+            System.out.println("você tem mais de 18 anos");
+            System.out.println("seja bem vindo");
+        }
+    }
+}
+```
+
+* Dica: pode-se usar "Ctrl + barra de espaço" após digitarmos "sysout" e apertarmos "Enter" para autocompletar o System.out.println(); também!
+
+* Feito isso, salvaremos, e com o lado direito do mouse acessaremos "Run As > Java Application". Obteremos o seguinte:
+
+* testando condicionais
+* você tem mais de 18 anos
+* seja bem vindo
+* Entre if e os parênteses que vêm a seguir, não é obrigatório ter espaço, mesmo que geralmente se use. No Java, o espaço, as teclas "TAB" e "Enter" não possuem papel fundamental. No Eclipse, ao acessarmos "Source > Format", o código é formatado de maneira correta.
+
+* Até aqui, nenhuma grande novidade. Neste caso, há duas instruções no bloco do if... Existe algo proveniente do C no Java, em que as chaves não são necessárias, quando se quer apenas uma instrução na condicional. Isto é, se a linha referente ao texto "seja bem vindo" não existisse, poderíamos remover as chaves, deixando assim:
+
+```java
+public class TestaCondicional {
+
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 20;
+        if (idade >= 18)
+            System.out.println("você tem mais de 18 anos");
+            // System.out.println("seja bem vindo");
+
+    }
+}
+```
+
+* O System.out.println(); que não está comentado (não está com as duas barras antes) faz parte do caso em que o if é true, verdadeiro. Quando temos um if ou um else sem o uso das chaves, não é possível ter duas instruções, e sim apenas uma. Por isso, a boa prática implica em usarmos as chaves independentemente da quantidade de instruções existentes.
+
+* Isso facilita enxergarmos quem faz parte do quê, deixando menos margem para dúvidas e erros, mas isso vai da preferência de quem programa.
+
+* Para o else, alteraremos idade para que se receba 16, e digitaremos:
+
+```java
+public class TestaCondicional {
+
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 16;
+        if (idade >= 18) {
+            System.out.println("você tem mais de 18 anos");
+            System.out.println("seja bem vindo");
+        } else {
+            System.out.println("infelizmente você não pode entrar");
+    }
+}
+```
+
+* Com isso, veremos a impressão de infelizmente você não pode entrar no Console. Para o caso da pessoa estar acompanhada, ela poder entrar, então acrescentaremos int quantidadePessoas = 3;, e um if após else. Em seguida, incluiremos outro else para o caso da pessoa ter menos de 18 e estar desacompanhada:
+
+```java
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 16;
+        int quantidadePessoas = 3;
+
+        if (idade >= 18) {
+            System.out.println("você tem mais de 18 anos");
+            System.out.println("seja bem vindo");
+        } else {
+            if(quantidadePessoas >= 2) {
+                System.out.println("você não tem 18, mas " + "pode entrar, pois está acompanhado");
+            } else {
+            System.out.println("infelizmente você não pode entrar");
+            }
+    }
+```
+
+* Quando o código começa a se estender demais pela tela, dificultando a visualização integral, pode-se apertar "Enter", o que, no Eclipse, faz com que as strings sejam separadas por aspas e + automaticamente.
+
+* Salvando e rodando o código, obteremos:
+
+* você não tem 18, mas pode entrar, pois está acompanhado
+* Outra dica: com duplo clique em qualquer uma das views, ela é maximizada. Fazemos o mesmo para minimizá-la. Isto pode facilitar nosso trabalho!
+
+<h2>Trabalhando com if</h2>
+
+* João está criando uma aplicação para calcular o IR a partir do salário. Ele olhou na tabela de IRPF e implementou as regras para 15% e 22.5%:
+
+```java
+public class TesteIR {
+
+    public static void main(String[] args) {
+
+        double salario = 3300.0;
+
+        if(salario < 2600.0) 
+            System.out.println("A sua aliquota é de 15%");
+            System.out.println("Você pode deduzir até R$ 350");
+
+        if(salario < 3750.0) 
+            System.out.println("A sua aliquota é de 22,5%");
+            System.out.println("Você pode deduzir até R$ 636");
+    }    
+}
+```
+
+* Porém o programa tem um comportamento estranho. Ao compilar e rodar, é impresso:
+
+* Você pode deduzir R$ 350
+* A sua aliquota é de 22,5%
+* Você pode deduzir R$ 636
+* Repare que o programa indica que podemos deduzir R$350 E R$636! Como corrigir o problema?
+
+* R:
+	* O problema é que faltam as chaves na condicional. Sem as chaves, o if apenas executará a primeira instrução depois dele. 
+	* Correto, devemos usar as chaves (sempre boa prática):
+```java
+        if(salario < 2600.0) {
+            System.out.println("A sua aliquota é de 15%");
+            System.out.println("Você pode deduzir R$ 350");
+        }
+
+        if(salario < 3750.0) {
+            System.out.println("A sua aliquota é de 22,5%");
+            System.out.println("Você pode deduzir R$ 636");
+       	}
+```
+
+<h2>Boolean condicionais</h2>
+
+
+* Vamos explorar um pouco mais o funcionamento do if, para o qual criaremos mais uma classe. É recomendado criá-las para termos um histórico do que está sendo montado, passo a passo. Em TestaCondicional2, teremos o código mais ou menos parecido com o que estávamos vendo até então:
+
+```java
+public class TestaCondicional2 {
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 16;
+        int quantidadePessoas = 3;
+
+        if (idade >= 18) {
+            System.out.println("você tem mais de 18 anos");
+            System.out.println("seja bem vindo");
+        } else {
+            if(quantidadePessoas >= 2) {
+                System.out.println("você não tem 18, mas " + "pode entrar, pois está acompanhado");
+            } else {
+            System.out.println("infelizmente você não pode entrar");
+            }
+        }
+    }
+}
+```
+
+* Porém, não é muito legal quando o código tem muitos ifs e elses encadeados, algo academicamente denominado complexidade ciclomática ou complexidade condicional. Neste nosso exemplo, poderíamos juntar os casos em que a pessoa tem mais de 18 anos e está acompanhada em uma condicional única.
+
+* Para isso, utilizaremos o operador ou, || - no Java, não existe or ou and como palavras chave.
+```java
+public class TestaCondicional2 {
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 16;
+        int quantidadePessoas = 3;
+
+        if (idade >= 18 || quantidadePessoas >= 2) {
+            System.out.println("seja bem vindo");
+        } else {
+            System.out.println("infelizmente você não pode entrar");
+        }
+    }
+}
+```
+* Vamos salvar e rodar o código para ver o que acontece? Será impresso no Console:
+
+* testando condicionais
+* seja bem vindo
+* Para este operador, basta apenas uma das condições ser true. Há também o e, ou &&, para quando houver necessidade de se ter mais de 18 anos e estar acompanhado, por exemplo. Isto é, se mantivermos idade como 16 e quantidadePessoas = 1;, obteremos infelizmente você não pode entrar.
+
+* Aprendemos sobre tipos de variáveis como o int e o double, para inteiros e pontos flutuantes, respectivamente, o char para quando se usa apenas um caractere, entre outros. Além deles, existe o boolean, palavra chave do Java que é um tipo de variável que só aceita true (verdadeiro) ou false (falso), e fazem parte das palavras reservadas do Java.
+
+```java
+public class TestaCondicional2 {
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 16;
+        boolean acompanhado = true;
+
+        if (idade >= 18 && acompanhado) {
+            System.out.println("seja bem vindo");
+        } else {
+            System.out.println("infelizmente você não pode entrar");
+        }
+    }
+}
+```
+
+* No Java, = atribui, enquanto == compara. Em boolean, no caso de acompanhado == true, o próprio acompanhado já é um valor booleano, portanto, == true não é necessário.
+
+* O que também aparece com certa frequência é, à direita do boolean, colocarmos uma expressão booleana como idade >= 18 && acompanhado. Sendo assim, poderíamos usar simplesmente boolean acompanhado = quantidadePessoas >= 2;, o que fará com que se conclua se a pessoa está acompanhada ou não. Com a idade sendo 20, se rodarmos o código, obteremos seja bem vindo.
+
+* Também é possível imprimirmos "valor de acompanhado" e concatená-lo com acompanhado, deixando o código final assim:
+
+```java
+public class TestaCondicional2 {
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+        int idade = 20;
+                int quantidadePessoas = 3;
+        boolean acompanhado = quantidadePessoas >= 2;
+
+                System.out.println("valor de acompanhado = " + acompanhado);
+
+        if (idade >= 18 && acompanhado) {
+            System.out.println("seja bem vindo");
+        } else {
+            System.out.println("infelizmente você não pode entrar");
+        }
+    }
+}
+```
+* Salvaremos e rodaremos mais uma vez, e imprimiremos o seguinte:
+
+* testando condicionais
+* valor de acompanhado = true
+* seja bem vindo
+
+<h2>Tipo boolean</h2>
+
+* Veja o código:
+
+```java
+int idade = 68;
+boolean ehIdoso = idade >= 65;
+```
+* Executando esse código corretamente dentro de um método main, qual será o valor da variável ehIdoso?
+
+* Obs: Se tiver com dúvida, faça o teste e imprima a variável: System.out.println(ehIdoso);
+
+* R: true
+
+<h2>Operador lógico</h2>
+
+* Abaixo há afirmações referentes às operações lógicas na linguagem Java. Quais delas são verdadeiras?
+* R: 
+
+	* Os operadores lógicos devem ter no lado esquerdo e direito uma expressão booleana.
+
+ 
+```java
+if (idade > 18 && idade < 65) {
+
+}
+```
+	* Repare que temos duas expressões booleanas, na esquerda e na direita do operador lógico &&.
+
+	* O operador lógico AND é representado pelos caracteres && e o OR pelo ||.
+
+	* AND é representado pelo && e OR pelo ||.
+
+
+<h2>Escopo e inicialização de variáveis</h2>
+
+* Seguindo com as condicionais, veremos os escopos de variáveis. Já sabemos que o boolean acompanhado passa a valer ao declararmos as variáveis. Se tentássemos usá-la antes, logo após idade, ocorreria erro de compilação, pois a declaração ainda não foi feita.
+
+* Vamos criar a classe TestaEscopo, em que colaremos o código de TestaCondicional2 pois trabalharemos em cima dele. Comentaremos a linha com o boolean para entendermos melhor o if, não esquecendo da declaração da variável acompanhado antes.
+
+* Uma variável, a partir de sua declaração, passa a valer entre as chaves correspondentes, o que se denomina escopo. Sendo assim, tanto acompanhado = true quanto acompanhado = false são necessários, pois fazem parte de escopos diferentes, com a inicialização sendo feita antes, em boolean acompanhado;, como se vê abaixo:
+
+```java
+public class TestaEscopo {
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+
+        int idade = 20;
+        int quantidadePessoas = 3;
+
+        // boolean acompanhado = quantidadePessoas >= 2;
+
+        boolean acompanhado;
+
+        if (quantidadePessoas >= 2) {
+            acompanhado = true;
+        } else {
+            acompanhado = false;
+        }
+
+        System.out.println("valor de acompanhado = " + acompanhado);
+
+        if (idade >= 18 && acompanhado) {
+            System.out.println("seja bem vindo");
+        } else {
+            System.out.println("infelizmente você não pode entrar");
+        }
+    }
+}
+```
+
+* Qual o valor default de um boolean?
+
+* No Java, essas variáveis do tipo local, como as que estamos vendo aqui, dentro de main, são temporárias e não possuem valor padrão, sendo necessária sua inicialização antes de sua impressão, acesso, em uma operação, e assim por diante.
+
+* O Eclipse "percorre" o caminho de seus ifs e da árvore de possibilidades, e identifica a existência de uma situação em que determinada variável pode ou não ter sido inicializada.
+
+<h2>Escopo de inicialização de variáveis</h2>
+* Seguindo com as condicionais, veremos os escopos de variáveis. Já sabemos que o boolean acompanhado passa a valer ao declararmos as variáveis. Se tentássemos usá-la antes, logo após idade, ocorreria erro de compilação, pois a declaração ainda não foi feita.
+
+* Vamos criar a classe TestaEscopo, em que colaremos o código de TestaCondicional2 pois trabalharemos em cima dele. Comentaremos a linha com o boolean para entendermos melhor o if, não esquecendo da declaração da variável acompanhado antes.
+
+* Uma variável, a partir de sua declaração, passa a valer entre as chaves correspondentes, o que se denomina escopo. Sendo assim, tanto acompanhado = true quanto acompanhado = false são necessários, pois fazem parte de escopos diferentes, com a inicialização sendo feita antes, em boolean acompanhado;, como se vê abaixo:
+
+```java
+public class TestaEscopo {
+    public static void main(String[] args) {
+        System.out.println("testando condicionais");
+
+        int idade = 20;
+        int quantidadePessoas = 3;
+
+        // boolean acompanhado = quantidadePessoas >= 2;
+
+        boolean acompanhado;
+
+        if (quantidadePessoas >= 2) {
+            acompanhado = true;
+        } else {
+            acompanhado = false;
+        }
+
+        System.out.println("valor de acompanhado = " + acompanhado);
+
+        if (idade >= 18 && acompanhado) {
+            System.out.println("seja bem vindo");
+        } else {
+            System.out.println("infelizmente você não pode entrar");
+        }
+    }
+}
+```
+
+* Qual o valor default de um boolean?
+
+* No Java, essas variáveis do tipo local, como as que estamos vendo aqui, dentro de main, são temporárias e não possuem valor padrão, sendo necessária sua inicialização antes de sua impressão, acesso, em uma operação, e assim por diante.
+
+* O Eclipse "percorre" o caminho de seus ifs e da árvore de possibilidades, e identifica a existência de uma situação em que determinada variável pode ou não ter sido inicializada.
+
+
+<h2>Declaração da variável</h2>
+
+* Dessa vez, João fez uma implementação para calcular o salário de um funcionário em caso de promoção. Ele fez a seguinte implementação:
+
+```java
+public class TesteSalario {
+
+    public static void main(String[] args) {
+
+        boolean foiPromovido = true;
+
+        if(foiPromovido) {
+            double salario = 4200.0;
+        } else {
+            double salario = 3800.0;
+        }
+
+        System.out.println(salario);
+    }
+}
+```
+* Qual será o resultado da compilação/execução?
+
+* R: O código nem compila, pois fora do bloco if/else a variável salario não existe mais.
+
+<h2>Opcional: Alíquota com ifs</h2>
+* O João gostaria de criar um programa sobre Imposto de Renda (IR) e verificou as regras de alíquota. Ele descobriu no site da receita:
+
+* De 1900.0 até 2800.0, o IR é de 7.5% e pode deduzir na declaração o valor de R$ 142
+* De 2800.01 até 3751.0, o IR é de 15% e pode deduzir R$ 350
+* De 3751.01 até 4664.00, o IR é de 22.5% e pode deduzir R$ 636
+* Para começar, o João escreveu o seguinte esboço de classe:
+
+```java
+public class TesteIR {
+
+    public static void main(String[] args) {
+
+        double salario = 3300.0;
+
+        //ifs aqui
+    }
+}
+```
+
+* Agora ajude o João a implementação todas as regras usando condicionais!
+
+* Obs: Os valores de alíquota exatos foram simplificados. Os valores exatos se encontram neste link.
+
+
+* Segue uma possível implementação:
+
+```java
+public class TesteIR2 {
+
+    public static void main(String[] args) {
+
+        // De 1900.0 até 2800.0 o IR é de 7.5% e pode deduzir R$ 142
+        // De 2800.01 até 3751.0 o IR é de 15% e pode deduzir R$ 350
+        // De 3751.01 até 4664.00 o IR é de 22.5% e pode deduzir R$ 636
+
+        double salario = 3300.0;
+
+        if(salario >= 1900.0 && salario <= 2800.0) {
+            System.out.println("A sua aliquota é de 7%");
+            System.out.println("Você pode deduzir até R$ 142");
+        } else if(salario >= 2800.01 && salario <= 3751.0) {
+            System.out.println("A sua aliquota é de 15%");
+            System.out.println("Você pode deduzir até R$ 350");
+        } else if(salario >= 3751.01 && salario <= 4664.0) {
+            System.out.println("A sua aliquota é de 22.5%");
+            System.out.println("Você pode deduzir até R$ 636");
+        }
+    }
+}
+```
+
+<h2>Para saber mais: o comando switch</h2>
+
+* Vimos como fazer testes com o if, mas se precisarmos fazer vários testes? Um exemplo, temos uma variável mes, precisamos testar o seu número e imprimir o seu mês correspondente. Então, vamos fazer 12 ifs?
+
+* Para esses casos, existe o comando switch, onde podemos colocar todas as opções ou rumos que o nosso programa pode tomar. Ele funciona da seguinte maneira:
+
+```java
+switch (variavelASerTestada) {
+    case opção1:
+            comando(s) caso a opção 1 tenha sido escolhida
+            break;
+    case opção2:
+            comando(s) caso a opção 2 tenha sido escolhida
+            break;
+    case opção3:
+            comando(s) caso a opção 3 tenha sido escolhida
+            break;
+    default:
+            comando(s) caso nenhuma das opções anteriores tenha sido escolhida
+}
+```
+* O código que será executado, que no nosso caso será a impressão do nome do mês, será o código em que a condição for verdadeira:
+
+```java
+public class TestaMes {
+
+    public static void main(String[] args) {
+
+        int mes = 10;
+
+        switch (mes) {
+            case 1:
+                System.out.println("O mês é Janeiro");
+                break;
+            case 2:
+                System.out.println("O mês é Fevereiro");
+                break;
+            case 3:
+                System.out.println("O mês é Março");
+                break;
+            case 4:
+                System.out.println("O mês é Abril");
+                break;
+            case 5:
+                System.out.println("O mês é Maio");
+                break;
+            case 6:
+                System.out.println("O mês é Junho");
+                break;
+            case 7:
+                System.out.println("O mês é Julho");
+                break;
+            case 8:
+                System.out.println("O mês é Agosto");
+                break;
+            case 9:
+                System.out.println("O mês é Setembro");
+                break;
+            case 10:
+                System.out.println("O mês é Outubro");
+                break;
+            case 11:
+                System.out.println("O mês é Novembro");
+                break;
+            case 12:
+                System.out.println("O mês é Dezembro");
+                break;
+            default:
+                System.out.println("Mês inválido");
+                break;
+        }
+    }
+}
+```
+
+* O break irá interromper a execução do caso que o contém, para os outros não serem executados, e se nenhuma condição for aceita, o código do default é que será executado. Por exemplo:
+
+```java
+public class TestaMes {
+
+    public static void main(String[] args) {
+
+        int mes = 13;
+
+        switch (mes) {
+            case 1:
+                System.out.println("O mês é Janeiro");
+                break;
+            case 2:
+                System.out.println("O mês é Fevereiro");
+                break;
+            case 3:
+                System.out.println("O mês é Março");
+                break;
+            case 4:
+                System.out.println("O mês é Abril");
+                break;
+            case 5:
+                System.out.println("O mês é Maio");
+                break;
+            case 6:
+                System.out.println("O mês é Junho");
+                break;
+            case 7:
+                System.out.println("O mês é Julho");
+                break;
+            case 8:
+                System.out.println("O mês é Agosto");
+                break;
+            case 9:
+                System.out.println("O mês é Setembro");
+                break;
+            case 10:
+                System.out.println("O mês é Outubro");
+                break;
+            case 11:
+                System.out.println("O mês é Novembro");
+                break;
+            case 12:
+                System.out.println("O mês é Dezembro");
+                break;
+            default:
+                System.out.println("Mês inválido");
+                break;
+        }
+    }
+}
+```
+
+* A impressão será Mês inválido. Então, o switch é uma solução para os ifs encadeados.
+
+--------------------------------------------------------
+<h1>Aula 07 - Controlando fluxo com laços</h1>
+
+* Finalmente chegamos nos laços, a última estrutura de controle de fluxo, básica e primordial em todas as linguagens! Criaremos uma classe específica para aprendermos sobre a estrutura de laço de repetição, o TestaWhile.
+
+* O while é uma palavra chave e, dentro dos parênteses, obrigatoriamente recebe uma expressão booleana, assim como o if. Por isso, precisaremos incluir algo lá dentro, que nos devolva true ou false.
+
+```java
+public class TestaWhile {
+
+    public static void main(String[] args) {
+        int contador = 0;
+        while(contador <= 10) {
+            System.out.println(contador);
+            contador = contador + 1;
+        }
+    }
+}
+```
+
+* Ao salvarmos e rodarmos o código, serão impressos os números de 0 a 10, como gostaríamos!
+
+* O while é uma instrução muito simples - lembrando que é preciso sempre inicializar e declarar a variável a ser utilizada, neste caso, em contador. Para reforçarmos algo que já foi visto, o escopo, poderemos imprimir contador novamente após o while:
+
+```java
+public class TestaWhile {
+
+    public static void main(String[] args) {
+        int contador = 0;
+        while(contador <= 10) {
+            System.out.println(contador);
+            contador = contador + 1;
+        }
+        System.out.println(contador);
+
+    }
+}
+```
+
+* A partir do qual se obtém a impressão de 0 a 11!
+
+* É claro que cabem outras condições booleanas no lugar de contador <= 10). Não é muito comum utilizarmos o formato contador = contador + 1; quando operamos sobre a própria variável, uma vez que existe uma forma mais sucinta, herdada do C:
+
+* contador += 1;
+* Não é que seja "igual a mais um"! Queremos somar 1 nele mesmo. É uma sintaxe estranha, mas indica exatamente o mesmo que contador = contador + 1;. Para o mesmo efeito, existe ainda o ++:
+
+* contador++;
+* Esta, na verdade, é a forma mais comum de se somar o valor de si mesmo mais uma vez, e usar ++contador; (o pré-incremento) também traria o mesmo resultado. Há casos em que existem diferenças, mas por ora não nos preocuparemos com isso.
+
+* É muito mais importante entendermos o escopo, que a variável precisa ser inicializada antes de se fazer qualquer ação com ela, pois isso não acontece automaticamente em condições temporárias, e que o while é o sistema de laço mais simples de todos.
+
+<h2>Enquanto isso, o while...</h2>
+
+* Fernando decidiu praticar seu conhecimento sobre a estrutura de repetição while. Ele escreveu o seguinte programa:
+
+```java
+package projeto;
+
+public class Programa {
+
+    public static void main(String args[]) {
+
+        int contador = 1;
+
+        while(contador <= 10) {
+
+            System.out.println(contador);
+        }
+    }
+}
+```
+
+* Todavia, seu programa só imprime no console 1 infinitamente.
+
+* Consegue enxergar o problema no código de Fernando? Depois de formar uma opinião compare seu achado com a resposta do instrutor logo em seguida.
+
+* O while aceita receber dois valores, true e false. O valor true mantém o loop em execução, já o false o finaliza. Esses valores podem ser resultados de uma expressão como contador <= 10. Todavia, no código de Fernando, ele não incrementou a variável contador a cada iteração do while. Devido a esse esquecimento, a variável contador sempre mantinha o valor 1 fazendo com que o programa caísse em um loop infinito.
+
+<h2>Fixando o laço while</h2>
+
+* Quais as afirmações abaixo são verdadeira em relação ao while?
+
+* R: 
+	* Na expressão condicional do while é possível utilizar qualquer operador de comparação (< [menor], > [maior], <= [menor ou igual], >= [maior ou igual], == [igual a] e != [diferente de]) e qualquer operador lógico (&& [and], || [ou]). 
+	* Isso aí, aluno! Todos os operadores de comparação e lógicos são válidos na expressão condicional do while! Use-os com sabedoria!
+
+	* O while sempre precisará de uma expressão condicional que definirá quando o laço deve ser interrompido.
+ 
+	* Muito bem! Lembre-se, essa expressão condicional precisará ser informada dentro dos parênteses do while e pode ainda utilizar qualquer um dos operadores de comparação e operadores lógicos aprendidos no capítulo 6.
+
+
+<h2>Escopo nos laços</h2>
+
+* Para vermos o laço de forma mais estruturada e desafiadora, faremos uma somatória com os números de 0 a 10, criando a classe TestaSomatoria:
+
+```java
+public class TestaSomatoria {
+
+    public static void main(String[] args) {
+        int contador = 0;
+        while(contador <= 10) {
+            int total = 0;
+            total = total + contador;
+
+            System.out.println(total);
+            contador++;
+            }
+    }
+}
+```
+
+* Vamos imprimir as somatórias parciais para ver o que está acontecendo?
+
+* Queremos que se mostre 0, seguido de 1, e então 2, 3, por causa de 1 + 2, e então 6, de 1 + 2 + 3. No entanto, obteremos:
+
+* 0
+* 1
+* 2
+* 3
+* 4
+* 5
+* 6
+* 7
+* 8
+* 9
+* 10
+* Ué! Não funcionou! Isto porque toda vez que se entra no while, é criada uma nova variável total por causa do escopo e, ao voltarmos ao próximo laço, quando ocorre a iteração, ele zera de novo, pois a velha total já deixou de existir.
+
+* Falta acertarmos o escopo declarando e inicializando a variável total após a linha que contém contador:
+
+```java
+public class TestaSomatoria {
+
+    public static void main(String[] args) {
+        int contador = 0;
+        int total = 0;
+
+        while(contador <= 10) {
+
+            total = total + contador;
+
+            System.out.println(total);
+            contador++;
+            }
+    }
+}
+```
+* Se salvarmos e rodarmos novamente, desta vez veremos o seguinte no Console:
+
+* 0
+* 1
+* 3
+* 6
+* 10
+* 15
+* 21
+* 28
+* 36
+* 45
+* 55
+* Ou seja, as somatórias parciais, incluindo a última, 55, que é o número desejado. Se quisermos apenas este resultado final, poderemos deixar o código assim:
+
+```java
+public class TestaSomatoria {
+
+    public static void main(String[] args) {
+        int contador = 0;
+        int total = 0;
+
+        while(contador <= 10) {
+            total = total + contador;
+            contador++;
+            }
+            System.out.println(total);
+    }
+}
+```
+* Salvando e rodando o código novamente, obtém-se a impressão de 55.
+
+* É possível deixar este código mais enxuto, porém focaremos em total = total + contador;, que já vimos que pode ser escrito assim: total += contador;, o qual traz exatamente o mesmo resultado.
+
+<h2>Um erro de compilação...</h2>
+
+* Clarice, amiga de Fernando, percebeu que ele está com dificuldade na implementação de um loop feito com while. Seu objetivo é imprimir no console os números de 1 a 10. No entanto, o código não compilava. Vejamos seu código:
+
+```java
+package projeto;
+
+public class Programa {
+
+    public static void main(String[] args) {
+
+        while (contador <= 10) {
+            int contador = 1;            
+            System.out.println(contador);
+            contador++;
+        }
+    }
+}
+```
+* Se você estivesse com Clarice agora, como explicaria o problema do código para ele? Depois de pensar em uma explicação, compare-a com a do instrutor a seguir.
+
+* Clarice sabiamente se preocupou em incrementar a variável contador a cada iteração do while para que o loop chegasse ao fim e não caísse em um loop infinito. Todavia, ela declarou a variável contador dentro do bloco do while. Por uma questão de escopo, essa variável só existirá dentro do bloco while. Para piorar as contas, a expressão contador <= 10 tenta acessar uma variável que ainda não foi declarada, razão principal do erro de compilação que esta enfrentado.
+
+* Corrigindo o código temos:
+```java
+package projeto;
+
+public class Programa {
+
+    public static void main(String args[]) {
+
+        int contador = 1;        
+
+        while (contador <= 10) {        
+            System.out.println(contador);
+            contador++;
+        }
+    }
+}
+```
+
+<h2>Laço com for</h2>
+
+* O for tem a sintaxe um pouco mais estranha. O while é uma estrutura de laço, e o for realiza a mesma tarefa, porém possui algumas vantagens em relação à legibilidade, mesmo que o resultado final - o bytecode - seja o mesmo. Criaremos TestaFor, em que incluiremos algo equivalente ao laço feito anteriormente, que conta de 0 a 10 imprimindo todos os números.
+
+* Diferentemente do while, não é preciso declararmos contador fora dele, pois o for, palavra chave do Java, tem uma sintaxe muito diferente. Até então, utilizamos apenas ponto e vírgula no fim dos statements, isto é, das linhas. Neste caso, usaremos o ponto e vírgula dentro dos parênteses (isto também herança do C).
+
+* Dentro dos parênteses, então, serão criados três "espaços" intercalados por ponto e vírgula, e então abriremos e fecharemos as chaves normalmente. O primeiro espaço é opcional e costuma ter a declaração e inicialização da variável, sendo executado apenas uma vez.
+
+* O segundo espaço é executado todas as vezes e contém a condição booleana para saber se ele deve ou não entrar no laço, ou seja, executar a próxima iteração. No nosso caso, queremos saber se contador é menor ou igual a 10, como no while.
+
+* O terceiro espaço geralmente é ocupado por aquilo a ser executado ao fim de cada iteração, o que acaba sendo um tanto estranho para quem não está bem ambientado com isto. O código ficará desta maneira:
+
+```java
+public class TestaFor {
+
+    public static void main(String[] args) {
+        for(int contador = 0; contador <= 10; contador++) {
+            System.out.println(contador);
+        }
+    }
+}
+```
+
+* Salvaremos e rodaremos o código, e obteremos o esperado, como em while:
+
+* 0
+* 1
+* 2
+* 3
+* 4
+* 5
+* 6
+* 7
+* 8
+* 9
+* 10
+* Diferentemente do while, apesar de int contador = 0 valer no escopo do for inteiro em todas as iterações, ele não é zerado, sendo executado apenas uma vez, e por isto sua sintaxe não é muito intuitiva. Se quisermos imprimir o último valor que o contador estava lendo, não conseguiremos, por conta do escopo.
+
+* O for oferece a possibilidade de haver uma variável que participa de todas as iterações, que é o que precisamos, mas depois do for, ela deixa de valer.
+
+* Não é melhor usarmos o while, então? Depende. Muitas vezes queremos utilizar a variável temporariamente, somente dentro do laço, e é por isso que o for é mais atrativo, e se adequa melhor a este tipo de caso.
+
+* No entanto, while e for são intercambiáveis, e inclusive existe outro laço, denominado do-while, que não veremos neste curso, mas que também poderia ser utilizado.
+
+<h2>Laços encadeados</h2>
+
+* Já vimos todos os comandos básicos da sintaxe. Vamos praticar o uso dos laços, com o if, para sedimentarmos este conhecimento adquirido no curso! Criaremos uma classe para testarmos laços encadeados, aninhados uns aos outros: TestaLacos, com um main para imprimirmos de 0 a 10 dez vezes em linhas distintas, com a tabuada de cada número.
+
+* Usaremos o int multiplicador, começando pela tabuada do 1, indo à do 10. Dentro deste laço, queremos fazer outro, com valor diverso, como em um contador, também começando do 0 e indo a 10.
+
+```java
+public class TestaLacos {
+
+        public static void main(String[] args) {
+            for(int multiplicador = 1; multiplicador <= 10; multiplicador++) {
+                for(int contador = 0; contador <= 10; contador++) {
+                    System.out.println(multiplicador * contador);
+                }
+            }
+        }
+}
+```
+* Se pedirmos para que seja impresso multiplicador * contador, obteremos algo gigantesco, como verificaremos salvando e rodando o código. Serão impressos os resultados contendo as tabuadas, mas queremos algo um pouco mais organizado. Para isso, em vez de utilizarmos o System.out.println();, usaremos System.out.print();, seguido de System.out.print(" ");, que nos trará os números todos alinhados horizontalmente.
+
+* Ainda não é isto que queremos! Queremos um "Enter" a cada tabuada, quer dizer, cada tabuada em uma linha. Vamos, então, incluir outro System.out.println(); após o escopo do segundo for, assim:
+
+```java
+public class TestaLacos {
+
+        public static void main(String[] args) {
+            for(int multiplicador = 1; multiplicador <= 10; multiplicador++) {
+                for(int contador = 0; contador <= 10; contador++) {
+                    System.out.print(multiplicador * contador);
+                    System.out.print(" ");
+                }
+                System.out.println();
+            }
+        }
+}
+```
+
+* Salvando e rodando o código acima, obteremos, como gostaríamos:
+
+0 1 2 3 4 5 6 7 8 9 10
+0 2 4 6 8 10 12 14 16 18 20
+0 3 6 9 12 15 18 21 24 27 30
+0 4 8 12 16 20 24 28 32 36 40
+0 5 10 15 20 25 30 35 40 45 50
+0 6 12 18 24 30 36 42 48 54 60
+0 7 14 21 28 35 42 49 56 63 70
+0 8 16 24 32 40 48 56 64 72 80
+0 9 18 27 36 45 54 63 72 81 90
+0 10 20 30 40 50 60 70 80 90 100
+
+
+<h2>Mais laços com break</h2>
+
+* Feitas as tabuadas do vídeo anterior, vamos testar mais laços encadeados e ver como eles podem se comunicar? Criaremos para isto a classe TestaLacos2, para a qual copiaremos e colaremos o conteúdo de TestaLacos. Desta vez, substituiremos multiplicador por linha, enquanto contador passará a ser coluna. E não faremos mais multiplicações, e sim com que apareçam 10 linhas e 10 colunas. A partir do código abaixo, o que vocês acham que acontecerá?
+
+```java
+public class TestaLacos2 {
+    public static void main(String[] args) {
+        for(int linha = 0; linha < 10; linha++) {
+            for(int coluna = 0; coluna < 10; coluna++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+* Na aba "Console", será mostrado algo não muito interessante:
+
+**********
+**********
+**********
+**********
+**********
+**********
+**********
+**********
+**********
+**********
+
+* Uma grande quantidade de laços encadeados acaba não sendo esteticamente aprazível e, às vezes, queremos que um laço se comunique com outro. Para que os asteriscos formem uma matriz triangular, por exemplo, acrescentaríamos ao código um if para quando coluna for maior que linha, fazendo com que o laço pare de ser executado e saia dali para ir à próxima linha do for, externo.
+
+* Bem como em outras linguagens, existe um comando no Java, a palavra chave break, que "corta" a execução do laço mais interno, isto é, mais próximo de onde ela mesma se encontra, resultando exatamente no efeito que buscamos:
+
+```java
+public class TestaLacos2 {
+    public static void main(String[] args) {
+        for(int linha = 0; linha < 10; linha++) {
+            for(int coluna = 0; coluna < 10; coluna++) {
+                if(coluna > linha) {
+                    break;
+                }
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+* Ao salvarmos e rodarmos o código, teremos:
+
+*
+**
+***
+****
+*****
+******
+*******
+********
+*********
+**********
+
+* No exemplo acima, poderíamos obter o mesmo efeito usando a condicional if sem as chaves, pois o break ocupa apenas uma linha, como seria possível também com for e while. No entanto, por boa prática, e visando à legibilidade e convenção, optaremos por usar as chaves sempre que possível.
+
+* E no segundo for, poderíamos ter substituído coluna < 10 por coluna <= linha, modificando-se a instrução para não usarmos o break. Assim, o código completo ficaria da seguinte maneira:
+
+```java
+public class TestaLacos2 {
+    public static void main(String[] args) {
+        for(int linha = 0; linha < 10; linha++) {
+            for(int coluna = 0; coluna <= linha; coluna++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+* Há muitos exercícios a serem feitos e, mesmo que isso seja trivial para você, que já conhece outra linguagem de programação, ou esteja revendo comandos mais básicos, eles são interessantes para fixar erros de compilação. Senão, quando o conteúdo ficar mais complexo, as chances de se debater por aquilo que já deveria estar bem sedimentado serão maiores.
+
+* Portanto, não menospreze a sintaxe básica do Java! Se tiver dúvidas, use nosso fórum, com participação de instrutores e alunos, veja as dúvidas, busque se aprofundar cada vez mais.
+
+* Pratique bastante, pois no próximo curso encararemos os desafios de migrarmos da melhor forma de uma programação procedural, imperativa, para a tal da Orientação a Objetos. Muito obrigado!
+
+<h2>Fixando o comando break</h2>
+
+* Clarice está em dúvida sobre o modo como o break funciona quando utilizado dentro de laços de repetição aninhados. Escolha a opção que descreve exatamente o funcionamento desse comando nessas situações.
+
+* Para a execução do laço mais interno que contém o comando break e continua executando os laços mais externos.
